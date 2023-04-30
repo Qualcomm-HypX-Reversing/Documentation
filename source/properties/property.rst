@@ -12,7 +12,9 @@ Before we attempt to actually get any properties, we need to call ``get_prop_dev
 
 So, the question is, why are there two functions? The reason for this is that there are two places where properties can be located: in the hypervisor binary itself or in the external devcfg binary. If the property is in devcfg, we use ``get_prop_devcfg``. If the property is in the hypervisor, we use ``get_prop_hyp``. Regardless, these functions both do very similar things. 
 
-The first thing they do is get the ``pDal``. This structure can be thought as the root of the tree. This structure also contains a few elements. The first element is what I call the ``prop_base``. This is where the property search starts. The second known element is the ``PropBase`` array address. The third element is the ``PropBase`` array size. The struct definition can be found below:
+The first thing they do is check that the property memory region is valid. This is done via comparing the magic value - ``0x6008`` - at the beginning of the DAL memory region. 
+
+The second thing they do is get the ``pDal``. The address of the pDAL is at an offset of 8 from the base address of the DAL region. This structure can be thought as the root of the tree. This structure also contains a few elements. The first element is what I call the ``prop_base``. This is where the property search starts. The second known element is the ``PropBase`` array address. The third element is the ``PropBase`` array size. The struct definition can be found below:
 
 .. code-block:: C
     :caption: pDal

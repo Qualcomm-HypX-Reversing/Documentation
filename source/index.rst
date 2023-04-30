@@ -27,6 +27,9 @@ Note all the research for this project was done an SM-G9860 with a firmware vers
 
    general/intro
    properties/property
+   log
    reference
+   
+
 
 
